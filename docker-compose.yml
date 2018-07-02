@@ -1,0 +1,12 @@
+version: "3.1"
+
+services:
+
+  streamer:
+    build: .
+    command: node index.js
+    environment:
+      - FOSCAM_STREAM_URL=${FOSCAM_STREAM_URL}
+    ports:
+      - 9999:9999
+    restart: unless-stopped

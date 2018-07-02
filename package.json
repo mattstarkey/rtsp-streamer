@@ -1,0 +1,16 @@
+{
+  "name": "rtsp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "FOSCAM_STREAM_URL=rtsp://guest:guest12@192.168.8.109:88/videoMain node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ffmpeg": "0.0.4",
+    "node-rtsp-stream": "0.0.3"
+  }
+}
