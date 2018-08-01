@@ -5,12 +5,24 @@ const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
 stream = new Stream({
   name: 'foscam_stream',
   streamUrl: devUrl,
-  wsPort: 9999,
+  wsPort: 9797,
   width: 1280 / 2,
   height: 720 / 2,
   fps: '24',
   kbs: '256k'
 });
+
+
+
+// var WebSocketServer = require('ws').Server
+//     , wss = new WebSocketServer({port: 9999});
+//     wss.on('connection', function(ws) {
+//         ws.on('message', function(message) {
+//         console.log('Received from client: %s', message);
+//         ws.send('Server received from client: ' + message);
+//     });
+//  });
+
 
 var url = require("url");
 var http = require("http");

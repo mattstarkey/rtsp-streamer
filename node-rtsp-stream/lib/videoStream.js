@@ -81,7 +81,6 @@
     this.wsServer = new ws.Server({
       port: this.wsPort
     });
-    console.log(this.wsPort);
     this.wsServer.on("connection", function(socket) {
       return self.onSocketConnect(socket);
     });
@@ -112,7 +111,7 @@
     socket.send(streamHeader, {
       binary: true
     });
-    console.log(("" + this.name + ": New WebSocket Connection (") + this.wsServer.clients.length + " total)");
+    console.log(("" + this.name + ": New WebSocket Connection (") + self.wsServer.clients.length + " total)");
     return socket.on("close", function(code, message) {
       return console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
     });
