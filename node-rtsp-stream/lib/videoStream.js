@@ -81,6 +81,7 @@
     this.wsServer = new ws.Server({
       port: this.wsPort
     });
+    console.log(this.wsPort);
     this.wsServer.on("connection", function(socket) {
       return self.onSocketConnect(socket);
     });
@@ -90,7 +91,6 @@
       for (i in this.clients) {
         if (this.clients[i].readyState === 1) {
           _results.push(this.clients[i].send(data, opts));
-          console.log(i);
         } else {
           _results.push(console.log("Error: Client (" + i + ") not connected."));
         }
@@ -112,7 +112,6 @@
     socket.send(streamHeader, {
       binary: true
     });
-    console.log(this.wsServer);
     console.log(("" + this.name + ": New WebSocket Connection (") + this.wsServer.clients.length + " total)");
     return socket.on("close", function(code, message) {
       return console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
