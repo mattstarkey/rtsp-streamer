@@ -87,6 +87,7 @@
     this.wsServer.broadcast = function(data, opts) {
       var i, _results;
       _results = [];
+      console.log(this.clients);
       for (i in this.clients) {
         if (this.clients[i].readyState === 1) {
           _results.push(this.clients[i].send(data, opts));
