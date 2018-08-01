@@ -111,7 +111,7 @@
     socket.send(streamHeader, {
       binary: true
     });
-    console.log(socket);
+    console.log(this.wsServer);
     console.log(("" + this.name + ": New WebSocket Connection (") + this.wsServer.clients.length + " total)");
     return socket.on("close", function(code, message) {
       return console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
