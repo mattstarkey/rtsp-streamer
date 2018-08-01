@@ -12,8 +12,6 @@ stream = new Stream({
   kbs: '256k'
 });
 
-console.log(stream);
-
 var url = require("url");
 var http = require("http");
 var fs = require('fs');
