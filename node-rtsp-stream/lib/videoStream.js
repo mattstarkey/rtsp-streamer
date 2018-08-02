@@ -4,6 +4,10 @@
 
   ws = require('ws');
 
+  const uuidv4 = require('uuid/v4');
+
+  var socketClients = {};
+
   util = require('util');
 
   events = require('events');
@@ -84,6 +88,11 @@
     this.wsServer.on("connection", (socket) => {
       // socket.send('test');
       console.log('Connection');
+
+      var uid = uuidv4();
+      socket.uid = uid;
+      socketClients[uid] = socket;
+
       self.onSocketConnect(socket);
     });
     this.wsServer.broadcast = function (data, opts) {
@@ -92,10 +101,10 @@
 
       // console.log(this.clients);
       
-      for (i in this.clients) {
-        console.log(i);
-        if (this.clients[i].readyState === 1) {
-          _results.push(this.clients[i].send(data, opts));
+      for (i in socketClients) {
+        if (socketClients[i].readyState === 1) {
+          console.log(i);
+          _results.push(socketClients[i].send(data, opts));
         } else {
           _results.push(console.log("Error: Client (" + i + ") not connected."));
         }
