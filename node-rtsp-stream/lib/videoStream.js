@@ -93,7 +93,7 @@
       console.log(this.clients);
       
       for (i in this.clients) {
-        console.log(this.clients[i].readyState);
+        console.log(i);
         if (this.clients[i].readyState === 1) {
           _results.push(this.clients[i].send(data, opts));
         } else {
