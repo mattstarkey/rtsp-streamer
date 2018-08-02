@@ -90,7 +90,7 @@
       var i, _results;
       _results = [];
 
-      console.log(this.clients);
+      // console.log(this.clients);
       
       for (i in this.clients) {
         console.log(i);
