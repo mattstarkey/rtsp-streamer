@@ -89,6 +89,8 @@
     this.wsServer.broadcast = function (data, opts) {
       var i, _results;
       _results = [];
+
+      console.log(this.clients);
       
       for (i in this.clients) {
         console.log(this.clients[i].readyState);
