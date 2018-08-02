@@ -103,7 +103,7 @@
       
       for (i in socketClients) {
         if (socketClients[i].readyState === 1) {
-          console.log(i);
+          // console.log(i);
           _results.push(socketClients[i].send(data, opts));
         } else {
           _results.push(console.log("Error: Client (" + i + ") not connected."));

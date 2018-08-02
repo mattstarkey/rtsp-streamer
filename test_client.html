@@ -31,20 +31,19 @@
     //   console.log(data);
     // });
 
-    ws.onopen = function () {
-        console.log('websocket is connected ...')
-        // sending a send event to websocket server
-        ws.send('connected')
-    }
-    // event emmited when receiving message 
-    ws.onmessage = function (ev) {
-        console.log(ev);
-    }
+    // ws.onopen = function () {
+    //     console.log('websocket is connected ...');
+    //     ws.send('connected')
+    // }
+    
+    // ws.onmessage = function (ev) {
+    //     console.log(ev);
+    // }
 
-    // var canvas = document.querySelector('canvas');
-    // var player = new jsmpeg(ws, {
-    //   canvas: canvas
-    // });
+    var canvas = document.querySelector('canvas');
+    var player = new jsmpeg(ws, {
+      canvas: canvas
+    });
   </script>
 </body>
 
