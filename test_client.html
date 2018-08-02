@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Client</title>
@@ -11,18 +12,40 @@
     width: 640px;
   }
 </style>
+
 <body>
 
-<canvas width="640" height="360"></canvas>
+  <canvas width="640" height="360"></canvas>
 
 
-<script>
-  // var client = new WebSocket('ws://127.0.0.1:9797');
-  var client = new WebSocket('ws://142.93.33.84/wsapp');
-  var canvas = document.querySelector('canvas');
-  var player = new jsmpeg(client, {
-    canvas: canvas 
-  });
-</script>
+  <script>
+    // var ws = new WebSocket('ws://localhost:9797');
+    var ws = new WebSocket('ws://142.93.33.84/wsapp');
+    // var client = new WebSocket('ws://142.93.33.84/wsapp');
+
+    // ws.on('open', function open() {
+    //   ws.send('something');
+    // });
+
+    // ws.on('message', function incoming(data) {
+    //   console.log(data);
+    // });
+
+    ws.onopen = function () {
+        console.log('websocket is connected ...')
+        // sending a send event to websocket server
+        ws.send('connected')
+    }
+    // event emmited when receiving message 
+    ws.onmessage = function (ev) {
+        console.log(ev);
+    }
+
+    // var canvas = document.querySelector('canvas');
+    // var player = new jsmpeg(ws, {
+    //   canvas: canvas
+    // });
+  </script>
 </body>
+
 </html>
