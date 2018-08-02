@@ -89,10 +89,10 @@
     this.wsServer.broadcast = function (data, opts) {
       var i, _results;
       _results = [];
-      console.log(this.clients);
-      console.log('-----------------')
+      
       for (i in this.clients) {
         if (this.clients[i].readyState === 1) {
+          console.log(this.clients[i]);
           _results.push(this.clients[i].send(data, opts));
         } else {
           _results.push(console.log("Error: Client (" + i + ") not connected."));
