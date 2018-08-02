@@ -17,8 +17,8 @@
 
 
 <script>
-  var client = new WebSocket('ws://127.0.0.1:9797');
-  // var client = new WebSocket('ws://142.93.33.84/wsapp');
+  // var client = new WebSocket('ws://127.0.0.1:9797');
+  var client = new WebSocket('ws://142.93.33.84/wsapp');
   var canvas = document.querySelector('canvas');
   var player = new jsmpeg(client, {
     canvas: canvas 

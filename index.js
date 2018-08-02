@@ -15,13 +15,13 @@ stream = new Stream({
 
 
 // var WebSocketServer = require('ws').Server
-//     , wss = new WebSocketServer({port: 9999});
-//     wss.on('connection', function(ws) {
-//         ws.on('message', function(message) {
-//         console.log('Received from client: %s', message);
-//         ws.send('Server received from client: ' + message);
-//     });
-//  });
+//   , wss = new WebSocketServer({ port: 9797 });
+// wss.on('connection', function (ws) {
+//   ws.on('message', function (message) {
+//     console.log('Received from client: %s', message);
+//     ws.send('Server received from client: ' + message);
+//   });
+// });
 
 
 var url = require("url");
