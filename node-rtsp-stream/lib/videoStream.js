@@ -82,10 +82,9 @@
       port: this.wsPort
     });
     this.wsServer.on("connection", (socket) => {
-      socket.send('test');
+      // socket.send('test');
       console.log('Connection');
-      console.log(this.wsServer.clients.length);
-      // self.onSocketConnect(socket);
+      self.onSocketConnect(socket);
     });
     this.wsServer.broadcast = function (data, opts) {
       var i, _results;
