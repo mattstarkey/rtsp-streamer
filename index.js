@@ -1,7 +1,7 @@
 const Stream = require('./node-rtsp-stream');
 const streamUrl = process.env.FOSCAM_STREAM_URL;
 const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
-var ws = require('ws');
+// var ws = require('ws');
 
 stream = new Stream({
   name: 'foscam_stream',
