@@ -91,8 +91,8 @@
       _results = [];
       
       for (i in this.clients) {
+        console.log(this.clients[i].readyState);
         if (this.clients[i].readyState === 1) {
-          console.log(this.clients[i]);
           _results.push(this.clients[i].send(data, opts));
         } else {
           _results.push(console.log("Error: Client (" + i + ") not connected."));
