@@ -98,8 +98,8 @@
       }
       return _results;
     };
-    return this.on('camdata', function (data) {
-      return self.wsServer.broadcast(data);
+    this.on('camdata', (data) => {
+      this.wsServer.broadcast(data);
     });
   };
 
