@@ -1,11 +1,10 @@
 const Stream = require('./node-rtsp-stream');
 const streamUrl = process.env.FOSCAM_STREAM_URL;
 const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
-// var ws = require('ws');
 
 stream = new Stream({
   name: 'foscam_stream',
-  streamUrl: devUrl,
+  streamUrl: streamUrl,
   wsPort: 9797,
   width: 1280 / 2,
   height: 720 / 2,
@@ -13,35 +12,11 @@ stream = new Stream({
   kbs: '256k'
 });
 
-
-// var wsServer = new ws.Server({
-//   port: 9797
-// });
-// wsServer.on("connection", function(socket) {
-//   socket.send('test');
-//   console.log(wsServer.clients.length);
-//   console.log('Connection');
-// });
-
-
-
-// var WebSocketServer = require('ws').Server
-//   , wss = new WebSocketServer({ port: 9797 });
-// wss.on('connection', function (ws) {
-//   ws.on('message', function (message) {
-//     console.log('Received from client: %s', message);
-//     ws.send('Server received from client: ' + message);
-//   });
-// });
-
-
 var url = require("url");
 var http = require("http");
 var fs = require('fs');
 
 var server = http.createServer(function (request, response) {
-  // var path = url.parse(request.url).pathname;
-
   fs.readFile(__dirname + '/test_client.html', function (error, data) {
     if (error) {
       response.writeHead(404);

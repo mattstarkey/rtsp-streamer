@@ -20,26 +20,8 @@
 
   <script>
     // var ws = new WebSocket('ws://localhost:9797');
+    // var ws = new WebSocket('ws://142.93.33.84/wsapp');
     var ws = new WebSocket('ws://142.93.33.84/wsapp');
-    // var client = new WebSocket('ws://142.93.33.84/wsapp');
-
-    // ws.on('open', function open() {
-    //   ws.send('something');
-    // });
-
-    // ws.on('message', function incoming(data) {
-    //   console.log(data);
-    // });
-
-    // ws.onopen = function () {
-    //     console.log('websocket is connected ...');
-    //     ws.send('connected')
-    // }
-    
-    // ws.onmessage = function (ev) {
-    //     console.log(ev);
-    // }
-
     var canvas = document.querySelector('canvas');
     var player = new jsmpeg(ws, {
       canvas: canvas
