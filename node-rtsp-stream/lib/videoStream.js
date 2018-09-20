@@ -16,6 +16,10 @@
 
   STREAM_MAGIC_BYTES = "jsmp";
 
+  var EventEmitter = require('events');
+
+  var myEmitter = new EventEmitter();
+
   VideoStream = function (options) {
     this.name = options.name;
     this.streamUrl = options.streamUrl;
@@ -25,7 +29,7 @@
     this.wsPort = options.wsPort;
     this.inputStreamStarted = false;
     this.stream = void 0;
-    this.startMpeg1Stream();
+    // this.startMpeg1Stream();
     this.pipeStreamToSocketServer();
     return this;
   };
@@ -73,6 +77,12 @@
         }
       }
     });
+
+    myEmitter.on('kill', () => {
+      console.log('KILL');
+      this.mpeg1Muxer.stream.kill();
+    });
+
     this.mpeg1Muxer.on('ffmpegError', function (data) {
       return global.process.stderr.write(data);
     });
@@ -88,6 +98,13 @@
     this.wsServer.on("connection", (socket) => {
       // socket.send('test');
       console.log('Connection');
+      console.log(Object.keys(socketClients).length);
+
+      if (Object.keys(socketClients).length == 0) {
+        console.log("START");
+        this.startMpeg1Stream();
+        // this.pipeStreamToSocketServer();
+      }
 
       var uid = uuidv4();
       socket.uid = uid;
@@ -98,16 +115,16 @@
     this.wsServer.broadcast = function (data, opts) {
       var i, _results;
       _results = [];
-      
+
       for (i in socketClients) {
         if (socketClients[i].readyState === 1) {
           _results.push(socketClients[i].send(data, opts));
         } else {
           delete socketClients[i];
           _results.push(console.log("Error: Client (" + i + ") not connected."));
-          
         }
       }
+
       return _results;
     };
     this.on('camdata', (data) => {
@@ -127,6 +144,14 @@
     });
     console.log(("" + this.name + ": New WebSocket Connection (") + self.wsServer.clients.length + " total)");
     return socket.on("close", function (code, message) {
+
+      console.log('disconnect');
+      console.log(Object.keys(socketClients).length);
+
+      if (Object.keys(socketClients).length == 1) {
+        myEmitter.emit('kill');
+      }
+
       return console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
     });
   };
