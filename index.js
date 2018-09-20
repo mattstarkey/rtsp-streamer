@@ -63,4 +63,5 @@ var server = http.createServer(function (req, res) {
   
 
 });
-server.listen(8082);
+// server.listen(8082);
+server.listen(80);
