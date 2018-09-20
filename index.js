@@ -24,7 +24,7 @@ var path = require('path');
 var server = http.createServer(function (req, res) {
 
 
-  if (req.url === "/") {
+  if (req.url === "/client") {
     fs.readFile(__dirname + '/test_client.html', function (error, data) {
       if (error) {
         res.writeHead(404);
