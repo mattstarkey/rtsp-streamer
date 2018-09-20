@@ -103,6 +103,7 @@
         if (socketClients[i].readyState === 1) {
           _results.push(socketClients[i].send(data, opts));
         } else {
+          delete socketClients[i];
           _results.push(console.log("Error: Client (" + i + ") not connected."));
           
         }
