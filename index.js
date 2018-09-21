@@ -9,7 +9,7 @@ stream = new Stream({
   width: 1280 / 2,
   height: 720 / 2,
   fps: '24',
-  kbs: '256k'
+  kbs: '512k'
 });
 
 // stream.mpeg1Muxer.stream.kill();
