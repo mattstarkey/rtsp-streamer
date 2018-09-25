@@ -3,7 +3,7 @@ import os
 import subprocess
 
 while True:
-    cmd = 'wc -c /var/log/supervisor/foscam_streamer.err'.split(' ')
+    cmd = 'wc -c /var/log/rtsp/rtsp.err.log'.split(' ')
     result1 = int(subprocess.check_output(cmd).split(' ')[0])
     print(result1)
     time.sleep(5)
