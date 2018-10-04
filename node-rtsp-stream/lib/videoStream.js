@@ -108,7 +108,7 @@
 
       setInterval(_ => {
         console.log(Object.keys(socketClients).length);
-      })
+      }, 1000);
 
       var uid = uuidv4();
       socket.uid = uid;
