@@ -25,7 +25,7 @@ var server = http.createServer(function (req, res) {
 
   console.log(req.url);
 
-  if (req.url === "/client") {
+  if (req.url === "/") {
     fs.readFile(__dirname + '/test_client.html', function (error, data) {
       if (error) {
         res.writeHead(404);
