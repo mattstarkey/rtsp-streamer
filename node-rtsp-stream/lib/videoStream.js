@@ -106,6 +106,10 @@
         // this.pipeStreamToSocketServer();
       }
 
+      setInterval(_ => {
+        console.log(Object.keys(socketClients).length);
+      })
+
       var uid = uuidv4();
       socket.uid = uid;
       socketClients[uid] = socket;
