@@ -47,22 +47,22 @@
         canvas: canvas
       });
 
-      var window_focus = true;
+      // var window_focus = true;
 
-      window.onblur = function () {
-        ws.close();
-        // player.destroy();
-        console.log('Closed');
-      }
-      window.onfocus = function () {
-        if (ws.CLOSED) {
-          ws = new WebSocket('ws://localhost:9797');
-          player = new jsmpeg(ws, {
-            canvas: canvas
-          });
-        }
-        console.log('Opening');
-      }
+      // window.onblur = function () {
+      //   ws.close();
+      //   // player.destroy();
+      //   console.log('Closed');
+      // }
+      // window.onfocus = function () {
+      //   if (ws.CLOSED) {
+      //     ws = new WebSocket('ws://localhost:9797');
+      //     player = new jsmpeg(ws, {
+      //       canvas: canvas
+      //     });
+      //   }
+      //   console.log('Opening');
+      // }
 
     }, 0);
 
