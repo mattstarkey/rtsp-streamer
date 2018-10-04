@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "FOSCAM_STREAM_URL=rtsp://guest:guest12@umhlangacam1.ddns.net:88/videoMain forever index.js"
+    "start": "FOSCAM_STREAM_URL=rtsp://guest:guest12@umhlangacam1.ddns.net:88/videoMain node index.js"
   },
   "author": "",
   "license": "ISC",
