@@ -38,12 +38,18 @@
     margin: auto;
     /*top: -280px;*/
   }
+  
+  #message {
+    text-align: center;
+    font-family: sans-serif;
+  }
 </style>
 
 <body>
 
   <div class="tv">
     <canvas id="canvas" width="640" height="360"></canvas>
+    <p id="message"></p>
   </div>
 
 
@@ -77,8 +83,8 @@
 
     }, 0);
 
-
-
+    var str = `As of ${new Date().toDateString()}, this service is in beta and will not always function as expected. The service will restart every hour.`;
+    document.querySelector('#message').text = str;
 
     var ctx = document.getElementById("canvas").getContext("2d");
     ctx.fillStyle = "black";
