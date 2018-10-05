@@ -82,9 +82,13 @@
       // }
 
     }, 0);
+    
+    document.addEventListener("DOMContentLoaded", function(event) { 
+      var str = `As of ${new Date().toDateString()}, this service is in beta and will not always function as expected. The service will restart every hour.`;
+      document.querySelector('#message').textContent = str;
+    });
 
-    var str = `As of ${new Date().toDateString()}, this service is in beta and will not always function as expected. The service will restart every hour.`;
-    document.querySelector('#message').text = str;
+    
 
     var ctx = document.getElementById("canvas").getContext("2d");
     ctx.fillStyle = "black";
