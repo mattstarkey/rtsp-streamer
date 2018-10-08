@@ -20,6 +20,8 @@
 
   var myEmitter = new EventEmitter();
 
+  var serviceStarted = false;
+
   VideoStream = function (options) {
     this.name = options.name;
     this.streamUrl = options.streamUrl;
@@ -81,6 +83,7 @@
     myEmitter.on('kill', () => {
       console.log('KILL');
       this.mpeg1Muxer.stream.kill();
+      serviceStarted = false;
     });
 
     this.mpeg1Muxer.on('ffmpegError', function (data) {
@@ -95,20 +98,34 @@
     this.wsServer = new ws.Server({
       port: this.wsPort
     });
+
+    this.wsServer.onmessage = function (event) {
+      console.log(event.data);
+    }
+
     this.wsServer.on("connection", (socket) => {
       // socket.send('test');
       console.log('Connection');
       console.log(Object.keys(socketClients).length);
 
-      if (Object.keys(socketClients).length == 0) {
+      // if (Object.keys(socketClients).length == 0) {
+      if (!serviceStarted) {
         console.log("START");
-        this.startMpeg1Stream();
+
+        var now = new Date();
+        if (now.getUTCHours() >= 20 || now.getUTCHours() < 3) {
+          console.log('Dont start stream');
+        } else {
+          serviceStarted = true;
+          console.log('Start stream');
+          this.startMpeg1Stream();
+        }
         // this.pipeStreamToSocketServer();
       }
 
-      setInterval(_ => {
-        console.log(Object.keys(socketClients).length);
-      }, 1000);
+      // setInterval(_ => {
+      //   console.log(Object.keys(socketClients).length);
+      // }, 1000);
 
       var uid = uuidv4();
       socket.uid = uid;
@@ -125,7 +142,12 @@
           _results.push(socketClients[i].send(data, opts));
         } else {
           delete socketClients[i];
-          _results.push(console.log("Error: Client (" + i + ") not connected."));
+
+          if (Object.keys(socketClients).length == 0) {
+            myEmitter.emit('kill');
+          }
+
+          console.log("Error: Client (" + i + ") not connected.");
         }
       }
 
@@ -146,18 +168,13 @@
     socket.send(streamHeader, {
       binary: true
     });
+
     console.log(("" + this.name + ": New WebSocket Connection (") + self.wsServer.clients.length + " total)");
-    return socket.on("close", function (code, message) {
 
-      console.log('disconnect');
-      console.log(Object.keys(socketClients).length);
-
-      if (Object.keys(socketClients).length == 1) {
-        myEmitter.emit('kill');
-      }
-
-      return console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
+    socket.on("close", function (code, message) {
+      console.log(("" + this.name + ": Disconnected WebSocket (") + self.wsServer.clients.length + " total)");
     });
+
   };
 
   module.exports = VideoStream;
