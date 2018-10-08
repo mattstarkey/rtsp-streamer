@@ -1,6 +1,7 @@
 const Stream = require('./node-rtsp-stream');
 const streamUrl = process.env.FOSCAM_STREAM_URL;
 const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
+const WeatherService = require('./node-rtsp-stream/lib/weatherService');
 
 stream = new Stream({
   name: 'foscam_stream',
@@ -10,6 +11,15 @@ stream = new Stream({
   height: 720,
   fps: '24',
   kbs: '512k'
+});
+
+var weatherJson;
+
+var Weather = new WeatherService();
+
+Weather.getWeatherJson(946165).then(json => {
+  console.log(json);
+  weatherJson = json;
 });
 
 // stream.mpeg1Muxer.stream.kill();
@@ -23,7 +33,12 @@ var path = require('path');
 
 var server = http.createServer(function (req, res) {
 
-  console.log(req.url);
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+    'Access-Control-Max-Age': 2592000,
+    'Content-Type': 'application/json'
+  };
 
   if (req.url === "/") {
     fs.readFile(__dirname + '/test_client.html', function (error, data) {
@@ -54,13 +69,17 @@ var server = http.createServer(function (req, res) {
     var fileStream = fs.createReadStream(imagePath);
     res.writeHead(200, { "Content-Type": "image/png" });
     fileStream.pipe(res);
+  } else if (req.url === "/weather") {
+    res.writeHead(200, headers);
+    res.write(weatherJson);
+    res.end();
   } else {
     res.writeHead(404, { "Content-Type": "text/html" });
     res.end("No Page Found");
   }
 
 
-  
+
 
 });
 server.listen(8080);

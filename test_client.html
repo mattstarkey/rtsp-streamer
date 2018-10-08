@@ -44,14 +44,15 @@
 
   @media only screen and (max-width: 600px) {
     .container {
-        width: 100%;
-        height: auto;
+      width: 100%;
+      height: auto;
     }
+
     canvas {
       width: 100%;
       height: auto;
     }
-}
+  }
 
   .topRight {
     position: absolute;
@@ -90,6 +91,25 @@
     font-family: sans-serif;
     z-index: -2;
   }
+
+  .weather {
+    display: flex;
+  }
+
+  .chunk {
+    height: 80px;
+    flex: 1;
+    width: 20%;
+    text-align: center;
+  }
+
+  .chunk p {
+    font-family: sans-serif;
+  }
+
+  .chunk img {
+    width: 10%;
+  }
 </style>
 
 <body>
@@ -100,6 +120,7 @@
     <div id="open"></div>
     <img class="topRight" src="http://www.pngall.com/wp-content/uploads/2016/06/Skull-High-Quality-PNG.png">
     <p id="message"></p>
+    <div class="weather"></div>
   </div>
 
 
@@ -107,9 +128,11 @@
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext("2d");
 
-    // var serviceAddress = 'ws://10.0.0.3:9797';
-    var serviceAddress = 'ws://142.93.33.84/wsapp';
-    // var serviceAddress = 'ws://localhost:9797';
+    // var ip = '10.0.0.3:8080';
+    var ip = '142.93.33.84:8080';
+    // var serviceAddress = '10.0.0.3:9797';
+    var serviceAddress = '142.93.33.84/wsapp';
+    // var serviceAddress = 'localhost:9797';
 
     var ws;
     var player;
@@ -127,7 +150,7 @@
     }
 
     function setupWS() {
-      ws = new WebSocket(serviceAddress);
+      ws = new WebSocket(`ws://${serviceAddress}`);
       player = new jsmpeg(ws, {
         canvas: canvas
       });
@@ -152,6 +175,37 @@
         // var str = `As of ${new Date().toDateString()}, this service is in beta and will not always function as expected. The service will restart every hour.`;
         // document.querySelector('#message').textContent = str;
       }
+
+      fetch(`http://${ip}/weather`).then(res => {
+        res.json().then(function (data) {
+          console.log(data.list);
+
+          var weatherContainer = document.querySelector('.weather');
+
+          for (let i = 0; i < 5; i++) {
+            const element = data.list[i];
+            console.log(element);
+
+            var chunk = document.createElement('div');
+            chunk.classList.add('chunk');
+            var speed = document.createElement('p');
+            speed.textContent = `${element.wind.speed} knots`;
+            speed.classList.add('speed');
+            var time = document.createElement('p');
+            time.textContent = `${element.dt_txt.split(' ')[1]}`;
+            time.classList.add('time');
+            var img = document.createElement('img');
+            img.style.transform = 'rotate(' + element.wind.deg + 'deg)';
+            img.src = './img/arrow2.png';
+
+            chunk.appendChild(speed);
+            chunk.appendChild(time);
+            chunk.appendChild(img);
+
+            weatherContainer.appendChild(chunk);
+          }
+        });
+      });
 
     });
 

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.4",
     "ffmpeg": "0.0.4",
     "node-rtsp-stream": "0.0.3",
     "uuid": "^3.3.2",
