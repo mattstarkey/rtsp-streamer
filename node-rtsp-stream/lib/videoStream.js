@@ -113,7 +113,7 @@
         console.log("START");
 
         var now = new Date();
-        if (now.getUTCHours() >= 20 || now.getUTCHours() < 3) {
+        if (now.getUTCHours() >= 17 || now.getUTCHours() < 3) {
           console.log('Dont start stream');
         } else {
           serviceStarted = true;

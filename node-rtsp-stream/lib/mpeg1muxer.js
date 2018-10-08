@@ -20,7 +20,7 @@
 
     var now = new Date();
 
-    if (now.getUTCHours() >= 20 || now.getUTCHours() < 3) {
+    if (now.getUTCHours() >= 17 || now.getUTCHours() < 3) {
       console.log('Don\'t start ffmpeg');
     } else {
       this.stream = child_process.spawn("ffmpeg", args, {
