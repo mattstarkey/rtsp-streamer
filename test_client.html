@@ -114,6 +114,15 @@
 </style>
 
 <body>
+  
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=479441145889808&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
   <div class="container">
     <canvas id="canvas"></canvas>
@@ -122,6 +131,7 @@
     <img class="topRight" src="http://www.pngall.com/wp-content/uploads/2016/06/Skull-High-Quality-PNG.png">
     <p id="message">17/10/2018 - Camera should be working correctly.</p>
     <div class="weather"></div>
+    <div class="fb-comments" data-href="http://umhlangasurfcam.co.za/" data-width="600" data-numposts="5"></div>
   </div>
 
 
