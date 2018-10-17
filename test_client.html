@@ -176,36 +176,36 @@
         // document.querySelector('#message').textContent = str;
       }
 
-      fetch(`http://${ip}/weather`).then(res => {
-        res.json().then(function (data) {
-          console.log(data.list);
+      //fetch(`http://${ip}/weather`).then(res => {
+      //  res.json().then(function (data) {
+      //    console.log(data.list);
+      
+      //    var weatherContainer = document.querySelector('.weather');
+      //
+      //    for (let i = 0; i < 5; i++) {
+      //      const element = data.list[i];
+      //      console.log(element);
 
-          var weatherContainer = document.querySelector('.weather');
+      //      var chunk = document.createElement('div');
+      //      chunk.classList.add('chunk');
+      //      var speed = document.createElement('p');
+      //      speed.textContent = `${element.wind.speed} knots`;
+      //      speed.classList.add('speed');
+      //      var time = document.createElement('p');
+      //      time.textContent = `${element.dt_txt.split(' ')[1]}`;
+      //      time.classList.add('time');
+      //      var img = document.createElement('img');
+      //      img.style.transform = 'rotate(' + element.wind.deg + 'deg)';
+      //      img.src = './img/arrow2.png';
 
-          for (let i = 0; i < 5; i++) {
-            const element = data.list[i];
-            console.log(element);
+      //      chunk.appendChild(speed);
+      //      chunk.appendChild(time);
+      //      chunk.appendChild(img);
 
-            var chunk = document.createElement('div');
-            chunk.classList.add('chunk');
-            var speed = document.createElement('p');
-            speed.textContent = `${element.wind.speed} knots`;
-            speed.classList.add('speed');
-            var time = document.createElement('p');
-            time.textContent = `${element.dt_txt.split(' ')[1]}`;
-            time.classList.add('time');
-            var img = document.createElement('img');
-            img.style.transform = 'rotate(' + element.wind.deg + 'deg)';
-            img.src = './img/arrow2.png';
-
-            chunk.appendChild(speed);
-            chunk.appendChild(time);
-            chunk.appendChild(img);
-
-            weatherContainer.appendChild(chunk);
-          }
-        });
-      });
+      //      weatherContainer.appendChild(chunk);
+      //    }
+      //  });
+      //});
 
     });
 
