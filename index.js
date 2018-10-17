@@ -1,7 +1,7 @@
 const Stream = require('./node-rtsp-stream');
 const streamUrl = process.env.FOSCAM_STREAM_URL;
 const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
-const WeatherService = require('./node-rtsp-stream/lib/weatherService');
+//const WeatherService = require('./node-rtsp-stream/lib/weatherService');
 
 stream = new Stream({
   name: 'foscam_stream',
@@ -13,14 +13,14 @@ stream = new Stream({
   kbs: '2048k'
 });
 
-var weatherJson;
+var weatherJson = "";
 
-var Weather = new WeatherService();
+//var Weather = new WeatherService();
 
-Weather.getWeatherJson(946165).then(json => {
-  console.log(json);
-  weatherJson = json;
-});
+//Weather.getWeatherJson(946165).then(json => {
+//  console.log(json);
+//  weatherJson = json;
+//});
 
 // stream.mpeg1Muxer.stream.kill();
 
