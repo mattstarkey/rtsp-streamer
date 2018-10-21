@@ -81,7 +81,6 @@
     });
 
     myEmitter.on('kill', () => {
-      console.log('KILL');
       this.mpeg1Muxer.stream.kill();
       serviceStarted = false;
     });
@@ -104,11 +103,6 @@
     }
 
     this.wsServer.on("connection", (socket) => {
-      // socket.send('test');
-      console.log('Connection');
-      console.log(Object.keys(socketClients).length);
-
-      // if (Object.keys(socketClients).length == 0) {
       if (!serviceStarted) {
         console.log("START");
 
@@ -120,12 +114,7 @@
           console.log('Start stream');
           this.startMpeg1Stream();
         }
-        // this.pipeStreamToSocketServer();
       }
-
-      // setInterval(_ => {
-      //   console.log(Object.keys(socketClients).length);
-      // }, 1000);
 
       var uid = uuidv4();
       socket.uid = uid;
@@ -134,8 +123,7 @@
       self.onSocketConnect(socket);
     });
     this.wsServer.broadcast = function (data, opts) {
-      var i, _results;
-      _results = [];
+      var i;
 
       for (i in socketClients) {
         if (socketClients[i].readyState === 1) {
@@ -150,8 +138,6 @@
           console.log("Error: Client (" + i + ") not connected.");
         }
       }
-
-      return _results;
     };
     this.on('camdata', (data) => {
       this.wsServer.broadcast(data);
