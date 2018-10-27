@@ -53,7 +53,7 @@
       width: 100%;
       height: auto;
     }
-    
+
     #open {
       height: 120px !important;
       top: 28px !important;
@@ -116,24 +116,41 @@
   .chunk img {
     width: 10%;
   }
+
+  .fullScreen {
+    text-align: center;
+    display: block;
+    width: 10%;
+    background: #64dcdc;
+    padding: 5px;
+    font-family: sans-serif;
+    border-radius: 2px;
+    margin: 3px auto;
+    cursor: pointer;
+  }
+
+  .fullScreen:active {
+    background-color: #36cece;
+  }
 </style>
 
 <body>
-  
+
   <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=479441145889808&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+  <script>(function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1&appId=479441145889808&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
   <div class="container">
     <canvas id="canvas"></canvas>
     <p id="getting" class="hide">Getting stream...</p>
     <div id="open"></div>
     <img class="topRight" src="http://www.pngall.com/wp-content/uploads/2016/06/Skull-High-Quality-PNG.png">
+    <a class="fullScreen">Full Screen</a>
     <p id="message">17/10/2018 - Camera should be working correctly.</p>
     <div class="weather"></div>
     <div class="fb-comments" data-href="http://umhlangasurfcam.co.za/" data-width="960" data-numposts="5"></div>
@@ -179,6 +196,22 @@
       setupWS();
     });
 
+    document.querySelector('.fullScreen').addEventListener('click', evt => {
+
+      var elem = document.querySelector("canvas");
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+
+    });
+
     document.addEventListener("DOMContentLoaded", function (event) {
 
       var now = new Date();
@@ -195,7 +228,7 @@
       //fetch(`http://${ip}/weather`).then(res => {
       //  res.json().then(function (data) {
       //    console.log(data.list);
-      
+
       //    var weatherContainer = document.querySelector('.weather');
       //
       //    for (let i = 0; i < 5; i++) {
