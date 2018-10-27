@@ -180,9 +180,11 @@
     var ws;
     var player;
     var hasLostFocus = false;
+    var streamingStarted = false;
 
     window.onblur = (evt) => {
       if (!hasLostFocus) {
+        streamingStarted = false;
         hasLostFocus = true;
         player.client.close();
         document.querySelector('#open').classList.remove('hide');
@@ -204,9 +206,17 @@
       evt.target.classList.add('hide');
       document.querySelector('#getting').classList.remove('hide');
       setupWS();
+      streamingStarted = true;
     });
 
     document.querySelector('.fullScreen').addEventListener('click', evt => {
+
+      if (!streamingStarted) {
+        hasLostFocus = false;
+        evt.target.classList.add('hide');
+        document.querySelector('#getting').classList.remove('hide');
+        setupWS();
+      }
 
       var elem = document.querySelector("canvas");
 
