@@ -127,7 +127,7 @@
 
       for (i in socketClients) {
         if (socketClients[i].readyState === 1) {
-          _results.push(socketClients[i].send(data, opts));
+          socketClients[i].send(data, opts);
         } else {
           delete socketClients[i];
 
