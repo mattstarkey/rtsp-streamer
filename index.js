@@ -1,5 +1,6 @@
 const Stream = require('./node-rtsp-stream');
 const streamUrl = process.env.FOSCAM_STREAM_URL;
+var exec = require('child_process').exec;
 const devUrl = 'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov';
 //const WeatherService = require('./node-rtsp-stream/lib/weatherService');
 
@@ -73,6 +74,19 @@ var server = http.createServer(function (req, res) {
     res.writeHead(200, headers);
     res.write(weatherJson);
     res.end();
+  } else if (req.url === "/update") {
+    var child = exec('git pull', function (err, stdout, stderr) {
+      if (err != null) {
+        res.writeHead(500, headers);
+        res.write(stderr);
+        res.end();
+        return;
+      } else {
+        res.writeHead(200, headers);
+        res.write(stdout);
+        res.end();
+      }
+    });
   } else {
     res.writeHead(404, { "Content-Type": "text/html" });
     res.end("No Page Found");
