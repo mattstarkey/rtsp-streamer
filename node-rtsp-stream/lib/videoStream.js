@@ -106,15 +106,17 @@
       if (!serviceStarted) {
         console.log("START");
 
-        var now = new Date();
-        if (now.getUTCHours() >= 17 || now.getUTCHours() < 3) {
-          console.log('Dont start stream');
-        } else {
-          serviceStarted = true;
-          console.log('Start stream');
-          this.startMpeg1Stream();
-        }
-      }
+        //var now = new Date();
+        //if (now.getUTCHours() >= 17 || now.getUTCHours() < 3) {
+        //  console.log('Dont start stream');
+        //} else {
+        //  serviceStarted = true;
+        //  console.log('Start stream');
+        //  this.startMpeg1Stream();
+        //}
+      //}
+      serviceStarted = true;
+      this.startMpeg1Stream();
 
       var uid = uuidv4();
       socket.uid = uid;
