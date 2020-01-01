@@ -35,7 +35,6 @@
     margin: auto;
     padding: 5px;
     border-radius: 3px;
-    display: none;
   }
 
   .container {
@@ -155,6 +154,10 @@
       display: none;
     }
   }
+  
+  .flex {
+    display: flex;
+  }
 </style>
 
 <body>
@@ -174,8 +177,14 @@
     <p id="getting" class="hide">Getting stream...</p>
     <div id="open"></div>
     <img class="topRight" src="http://www.pngall.com/wp-content/uploads/2016/06/Skull-High-Quality-PNG.png">
-    <a class="fullScreen">Full Screen</a>
-    <p id="message">If the camera is not working after a few attempts, <a class="fullScreen notWorking">Click here</a></p>
+    <div class="flex">
+      <div class="flex50">
+        <a class="fullScreen">Full Screen</a>
+      </div>
+      <div class="flex50">
+        <p id="message">If the camera is not working after a few attempts, <a class="fullScreen notWorking">Click here</a></p>
+      </div>
+    </div>
     <div class="weather"></div>
     <div class="fb-comments" data-href="http://umhlangasurfcam.co.za/" data-width="960" data-numposts="5"></div>
   </div>
