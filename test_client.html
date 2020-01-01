@@ -191,7 +191,7 @@
       <div class="flex50">
         <a class="fullScreen">Full Screen</a>
       </div>
-      <div class="flex50">
+      <div class="flex50 errorMessage">
         <p id="message">If the camera is not working after a few attempts, <a class="fullScreen notWorking">Click here</a></p>
       </div>
     </div>
@@ -219,7 +219,11 @@
       if (!hasLostFocus) {
         streamingStarted = false;
         hasLostFocus = true;
-        player.client.close();
+        
+        if (player) {
+          player.client.close();
+        }
+        
         document.querySelector('#open').classList.remove('hide');
         document.querySelector('#getting').classList.add('hide');
         ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
@@ -232,6 +236,10 @@
       player = new jsmpeg(ws, {
         canvas: canvas
       });
+      
+      ws.onmessage = function(event) {
+        document.querySelector('.errorMessage').style = "display:none;";
+      };
     }
     
     async function sendNotWorkingMessage() {
