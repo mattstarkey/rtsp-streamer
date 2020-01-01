@@ -237,7 +237,7 @@
         canvas: canvas
       });
       
-      ws.onmessage = function(event) {
+      ws.onopen = function(event) {
         document.querySelector('.errorMessage').style = "display:none;";
       };
     }
