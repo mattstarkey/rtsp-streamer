@@ -237,7 +237,11 @@
     async function sendNotWorkingMessage() {
       await fetch('https://mattsfunctions.azurewebsites.net/api/HttpTrigger1?code=z9zPAsRbul9At3/XX8LH/JbQXrNowLkjojXomyO5I5RiHbe5OzArRQ==');
       document.querySelector('#message').innerText = "Thanks, I'm on it...";
-      document.querySelector('.notWorking').style = "display:none;"
+      
+      if (document.querySelector('.notWorking')) {
+        document.querySelector('.notWorking').style = "display:none;";
+      }
+      
     }
     
     document.querySelector('.notWorking').addEventListener('click', (evt) => {
