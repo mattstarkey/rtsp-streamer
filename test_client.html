@@ -175,7 +175,7 @@
     <div id="open"></div>
     <img class="topRight" src="http://www.pngall.com/wp-content/uploads/2016/06/Skull-High-Quality-PNG.png">
     <a class="fullScreen">Full Screen</a>
-    <p id="message">Please leave a comment if the camera is not working and I'll try to fix it.</p>
+    <p id="message">If the camera is not working after a few attempts, <a class="fullScreen notWorking">Click here</a></p>
     <div class="weather"></div>
     <div class="fb-comments" data-href="http://umhlangasurfcam.co.za/" data-width="960" data-numposts="5"></div>
   </div>
@@ -214,21 +214,17 @@
         canvas: canvas
       });
     }
+    
+    function sendNotWorkingMessage() {
+      fetch('https://mattsfunctions.azurewebsites.net/api/HttpTrigger1?code=z9zPAsRbul9At3/XX8LH/JbQXrNowLkjojXomyO5I5RiHbe5OzArRQ==');
+    }
+    
+    document.querySelector('.notWorking').addEventListener('click', (evt) => {
+      sendNotWorkingMessage();
+    });
 
     document.querySelector('.advert').addEventListener('click', (evt) => {
-
-      //if (navigator.userAgent.match('CriOS')) {
-      //  window.open('http://apple.co/2DK0NRU');
-      //  return;
-      //}
-
-      //if (navigator.platform.indexOf('Android')) {
-      //  window.open('https://play.google.com/store/apps/details?id=com.RadGames.MaxBarrelz&fbclid=IwAR2nuehv0Gx6MOn7pyOfHaAMoUw2AJZYsHoeHp58PvgO60BSikxS5X1Twdc');
-      //  return;
-      //}
-
       window.open('http://rad-games.com');
-      
     });
 
     document.querySelector('#open').addEventListener('click', (evt) => {
@@ -266,62 +262,14 @@
 
       var now = new Date();
       if (now.getUTCHours() >= 17 || now.getUTCHours() < 3) {
-        // document.querySelector('#message').textContent = "Camera is offline from 19:00 - 05:00 South Africa time.";
-        //document.querySelector('#open').classList.add('hide');
-        //document.querySelector('#getting').classList.remove('hide');
-        //document.querySelector('#getting').textContent = "Camera is offline from 19:00 - 05:00 South Africa time."
+        document.querySelector('#message').textContent = "Camera is offline from 19:00 - 05:00 South Africa time.";
+        document.querySelector('#open').classList.add('hide');
+        document.querySelector('#getting').classList.remove('hide');
+        document.querySelector('#getting').textContent = "Camera is offline from 19:00 - 05:00 South Africa time."
       } else {
         // var str = `As of ${new Date().toDateString()}, this service is in beta and will not always function as expected. The service will restart every hour.`;
         // document.querySelector('#message').textContent = str;
       }
-
-      //fetch(`http://${ip}/weather`).then(res => {
-      //  res.json().then(function (data) {
-      //    console.log(data.list);
-
-      //    var weatherContainer = document.querySelector('.weather');
-      //
-      //    for (let i = 0; i < 5; i++) {
-      //      const element = data.list[i];
-      //      console.log(element);
-
-      //      var chunk = document.createElement('div');
-      //      chunk.classList.add('chunk');
-      //      var speed = document.createElement('p');
-      //      speed.textContent = `${element.wind.speed} knots`;
-      //      speed.classList.add('speed');
-      //      var time = document.createElement('p');
-      //      time.textContent = `${element.dt_txt.split(' ')[1]}`;
-      //      time.classList.add('time');
-      //      var img = document.createElement('img');
-      //      img.style.transform = 'rotate(' + element.wind.deg + 'deg)';
-      //      img.src = './img/arrow2.png';
-
-      //      chunk.appendChild(speed);
-      //      chunk.appendChild(time);
-      //      chunk.appendChild(img);
-
-      //      weatherContainer.appendChild(chunk);
-      //    }
-      //  });
-      //});
-
-    });
-
-
-
-
-
-    // var ctx = document.getElementById("canvas").getContext("2d");
-    // ctx.fillStyle = "black";
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // var img = new Image();
-    // img.onload = function () {
-    //   ctx.drawImage(img,
-    //     canvas.width / 2 - img.width / 2,
-    //     canvas.height / 2 - img.height / 2);
-    // };
-    // img.src = "/img/loading.png"; 
   </script>
 </body>
 
