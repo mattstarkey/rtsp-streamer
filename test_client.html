@@ -44,6 +44,7 @@
     z-index: 1;
     margin: auto;
     border: 1px solid black;
+    background: #25c4f7;
   }
 
   @media only screen and (max-width: 600px) {
@@ -144,7 +145,7 @@
 
   .advert {
     width: 100%;
-    height: 180px;
+    height: 100px;
     background: url(/img/TubeMasterLogo.png) no-repeat;
     background-size: 390px;
     background-position: center;
@@ -170,6 +171,9 @@
   
   .centerText {
     text-align: center;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: darkgrey;
   }
   
 </style>
@@ -185,9 +189,9 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
-<!--   <div class="advert"></div> -->
+  <div class="advert"></div>
+  <h1 class="centerText">Umhlanga Surf Cam</h1>
   <div class="container">
-    <h1 class="centerText">Umhlanga Surf Cam</h1>
     <canvas id="canvas"></canvas>
     <p id="getting" class="hide">Getting stream...</p>
     <div id="open"></div>
